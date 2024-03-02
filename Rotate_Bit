@@ -1,0 +1,47 @@
+#include<stdio.h>
+
+void print_binary(int value)
+{
+        int i = 31;
+        for(;i>=0;i--)
+        {
+                printf("%d ",1&(value>>i));
+        }
+        printf("\n");
+}
+
+int rotate_bit(unsigned int value,unsigned int position)
+{
+        int i,j,a,b,check = value;
+        for(j = position,i = 0;i<j;i++,j--)
+        {
+                a = 1&(check>>i);
+                b = 1&(check>>j);
+//              printf("A = %d B = %d \n",a,b);
+                if(a != b)
+                {/*
+                    
+                        value = value ^ (b<<i);
+                        value = value ^ (a<<j);
+                        print_binary(value); */
+                        if(a)
+                                value = value ^ (a<<j);
+                        if(b)
+                                value = value ^ (b<<i);
+                        if(a == 0)
+                                value = value ^ (1<<j);
+                        if(b == 0)
+                                value = value ^ (1<<i);
+//                      print_binary(value);
+                }
+        }
+        return value;
+}
+int main()
+{
+        int value,position;
+        printf("Enter the any value\n");
+        scanf("%d",&value);
+        print_binary(value);
+        printf("Enter the position number \n");
+        scanf("%d",&position);
